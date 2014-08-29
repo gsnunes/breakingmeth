@@ -1,33 +1,114 @@
 <html>
-
     <head>
-
         <style>
             body {
-                background:url(methpure.png) no-repeat center center fixed; width:100%; height:100%;
-                -webkit-background-size: cover;
-                -moz-background-size: cover;
-                -o-background-size: cover;
-                background-size: cover;
-                overflow:hidden
+                background: url("methpure.png") no-repeat fixed center center / cover rgba(0, 0, 0, 0);
+                height: 100%;
+                overflow: hidden;
+                width: 100%;
+                z-index: 0
+
             }
+
+            #crack-area{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                z-index: 12;
+            }
+
+            .start-box{
+                background-color: #3ADAFF;
+                border-radius: 13px;
+                box-shadow: 0 0 6px -1px black;
+                height: 100%;
+                margin: -12px;
+                padding: 23px;
+                position: absolute;
+                text-align: center;
+                width: 100%;
+                z-index: 15;
+
+            }
+
+            .start-button {
+                -moz-box-shadow:inset 0px 1px 0px 0px #97c4fe;
+                -webkit-box-shadow:inset 0px 1px 0px 0px #97c4fe;
+                box-shadow:inset 0px 1px 0px 0px #97c4fe;
+                background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3dd0f5), color-stop(1, #1f97cf) );
+                background:-moz-linear-gradient( center top, #3dd0f5 5%, #1f97cf 100% );
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3dd0f5', endColorstr='#1f97cf');
+                background-color:#3dd0f5;
+                -webkit-border-top-left-radius:0px;
+                -moz-border-radius-topleft:0px;
+                border-top-left-radius:0px;
+                -webkit-border-top-right-radius:0px;
+                -moz-border-radius-topright:0px;
+                border-top-right-radius:0px;
+                -webkit-border-bottom-right-radius:0px;
+                -moz-border-radius-bottomright:0px;
+                border-bottom-right-radius:0px;
+                -webkit-border-bottom-left-radius:0px;
+                -moz-border-radius-bottomleft:0px;
+                border-bottom-left-radius:0px;
+                text-indent:0;
+                border:1px solid #337fed;
+                display:inline-block;
+                color:#ffffff;
+                font-family:Arial;
+                font-size:15px;
+                font-weight:bold;
+                font-style:normal;
+                height:65px;
+                line-height:65px;
+                width:131px;
+                text-decoration:none;
+                text-align:center;
+                text-shadow:1px 1px 0px #1570cd;
+            }
+            .start-button:hover {
+                background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1f97cf), color-stop(1, #3dd0f5) );
+                background:-moz-linear-gradient( center top, #1f97cf 5%, #3dd0f5 100% );
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1f97cf', endColorstr='#3dd0f5');
+                background-color:#1f97cf;
+            }.start-button:active {
+                position:relative;
+                top:1px;
+            }
+
         </style>
-
     </head>
-
     <body>
+        <div id="crack-area"></div>
+        <div class="start-box" >
+            <img src="LOGO.png" >
+            <br>
+            <br>
+            <div >
+                <button class="start-button" >START</button>
+            </div>
+        </div>
 
-
+      
         <script src="jquery-1.11.1.min.js"></script>
         <script>
+            crackId = 0;
             $(document).ready(function() {
-                $('body').on('click', function(ev) {
+                $('#crack-area').on('click', function(ev) {
+                    crackId++;
+
+                    $('embed').remove();
+                    $('body').append('<embed src="audio/crack.mp3" autostart="true" hidden="true" loop="false">');
+
                     var randomIndex = Math.floor((Math.random() * 6) + 1);
-                    $(this).append('<img src="creaking/c' + randomIndex + '.png" style="position:absolute; top:' + (ev.clientY - 110) + 'px; left:' + (ev.clientX - 150) + 'px">');
+                    $(this).append('<div id="crack-' + crackId + '" style="position:absolute; top:' + (ev.clientY - 150) + 'px; left:' + (ev.clientX - 145) + 'px"><img src="creaking/c' + randomIndex + '.png" ></div>');
+                    $('#crack-' + crackId).hide().show('fast');
+                });
+
+                $('.start-button').on('click', function(ev) {
+                    $('.start-box').remove();
                 });
             });
         </script>
-
     </body>
-
 </html>
